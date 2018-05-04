@@ -1,5 +1,5 @@
 ---
-resource-types:
+resource_types:
 - name: serverless
   type: docker-image
   source:
@@ -27,6 +27,8 @@ jobs:
       
       - put: deploy
         params:
-          artifact_folder: example-repo/serverless
+          deploy: true
+          stage: dev
+          artifact_folder: example-repo/serverless/artifacts
           serverless_file: example-repo/serverless
 
