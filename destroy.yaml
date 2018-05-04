@@ -1,0 +1,34 @@
+---
+resource_types:
+- name: serverless
+  type: docker-image
+  source:
+    repository: quay.io/cosee-concourse/serverless-resource
+
+resources:
+- name: example-repo
+  type: git
+  source:
+    uri: git@github.com:hexlyops/serverless-example.git
+    private_key: ((github-key))
+    branch: master
+
+- name: serverless
+  type: serverless
+  source:
+    access_key_id: ((aws.key))
+    secret_access_key: ((aws.secret))
+    region_name: us-east-1
+
+jobs:
+  - name: destroy-hello-world
+    plan:
+      - get: example-repo
+      
+      - put: serverless
+        params:
+          remove: true
+          stage: dev
+          artifact_folder: example-repo/serverless/artifacts
+          serverless_file: example-repo/serverless
+
