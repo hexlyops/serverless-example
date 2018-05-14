@@ -1,9 +1,13 @@
 ---
 resource_types:
+# - name: serverless
+#   type: docker-image
+#   source:
+#     repository: quay.io/cosee-concourse/serverless-resource
 - name: serverless
   type: docker-image
   source:
-    repository: quay.io/cosee-concourse/serverless-resource
+    repository: 480699501737.dkr.ecr.us-east-1.amazonaws.com/concourse-serverless:0.1.0
 
 resources:
 - name: example-repo
@@ -28,7 +32,9 @@ jobs:
       - put: deploy
         params:
           deploy: true
+          npm_install: true
+          npm_build: true
+          npm_prefix: example-repo
           stage: dev
-          artifact_folder: example-repo/serverless/artifacts
-          serverless_file: example-repo/serverless
+          serverless: example-repo/serverless
 
