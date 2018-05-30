@@ -7,7 +7,7 @@ resource_types:
 - name: serverless
   type: docker-image
   source:
-    repository: 480699501737.dkr.ecr.us-east-1.amazonaws.com/concourse-serverless:0.1.0
+    repository: sjback/concourse-serverless
 
 resources:
 - name: example-repo
