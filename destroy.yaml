@@ -3,7 +3,8 @@ resource_types:
 - name: serverless
   type: docker-image
   source:
-    repository: quay.io/cosee-concourse/serverless-resource
+    repository: sjback/concourse-serverless
+    tag: latest
 
 resources:
 - name: example-repo
@@ -29,6 +30,5 @@ jobs:
         params:
           remove: true
           stage: dev
-          artifact_folder: example-repo/serverless/artifacts
-          serverless_file: example-repo/serverless
+          serverless: example-repo/serverless
 
